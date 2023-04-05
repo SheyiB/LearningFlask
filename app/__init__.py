@@ -1,6 +1,6 @@
 from flask import Flask
 
 
-app = Flask(__init__)
+app = Flask(__name__)
 
-from views import h
+from app import views
