@@ -1,9 +1,9 @@
 from app import app
 
-@app.route('/')
-def index():
-    return "<h1>Hi, Dad</h1>"
+@app.route('/admin/dashboard')
+def admin_dashboard():
+    return "<h1>Hi, Admin Here</h1>"
 
-@app.route('/about')
-def about():
-    return "<div style='color': blue  > Hi, Elijah here! </div>"
+@app.route('/admin/profile')
+def admin_profile():
+    return "<h1 style='color': blue  > Hi, Elijah the Admin here! </h1>"
