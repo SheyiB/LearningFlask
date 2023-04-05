@@ -1,6 +1,6 @@
 from app import app
 
-@app.route('/*')
+@app.route('/')
 def index():
     return "<h1>Hi, Dad</h1>"
 
