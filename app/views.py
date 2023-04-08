@@ -1,6 +1,6 @@
 from app import app
 
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, session
 
 @app.route('/')
 def index():
@@ -13,7 +13,8 @@ def about():
 @app.route("/<user>")
 def greet(user):
     print(f"Hi {user}!")
-    return f"<h3> Hello {user} </h3>"
+    #return f"<h3> Hello {user} </h3>"
+    return render_template("public/greet.html", content=user)
 
 @app.route("/account")
 def account():
