@@ -10,6 +10,11 @@ def index():
 def about():
     return "<div style='color': blue  > Hi, Elijah here! </div>"
 
+@app.route("/<user>")
+def greet(user):
+    print(f"Hi {user}!")
+    return f"<h3> Hello {user} </h3>"
+
 @app.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
     
