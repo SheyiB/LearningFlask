@@ -1,6 +1,6 @@
 from app import app
 
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, url_for
 
 @app.route('/')
 def index():
@@ -14,6 +14,10 @@ def about():
 def greet(user):
     print(f"Hi {user}!")
     return f"<h3> Hello {user} </h3>"
+
+@app.route("/account")
+def account():
+    return redirect(url_for("index"))
 
 @app.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
