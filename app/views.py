@@ -11,9 +11,11 @@ def index():
 
 @app.route('/user')
 def user():
-    user = session["user"].get("username") 
-   
-    return render_template("public/user.html", content=user)
+    if 'user' in session:
+        user = session["user"].get("username") 
+        return render_template("public/user.html", content=user)
+    else:
+        return render_template(url_for('account'))
 
 @app.route('/about')
 def about():
