@@ -12,7 +12,7 @@ def index():
 def about():
     return "<div style='color': blue  > Hi, Elijah here! </div>"
 
-@app.route("/<user>")
+@app.route("/greetuser/<user>")
 def greet(user):
     print(f"Hi {user}!")
     #return f"<h3> Hello {user} </h3>"
@@ -22,6 +22,7 @@ def greet(user):
 def account():
     if request.method == "POST":
         session["user"] = request.form
+        return redirect(url_for("index"))
     else:
         return render_template("public/login.html")
 
