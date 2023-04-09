@@ -1,8 +1,10 @@
 from app import app
 
 from flask import render_template, request, redirect, url_for, session
+from datetime import timedelta
 
 app.secret_key = "demoFlask"
+app.permanent_session_lifetime = timedelta(minutes=60)
 
 @app.route('/')
 def index():
@@ -15,7 +17,7 @@ def user():
         user = session["user"].get("username") 
         return render_template("public/user.html", content=user)
     else:
-        return render_template(url_for('account'))
+        return redirect(url_for('account'))
 
 @app.route('/about')
 def about():
@@ -30,6 +32,7 @@ def greet(user):
 @app.route("/login", methods = ["POST","GET"])
 def account():
     if request.method == "POST":
+        session.permanent = True
         session["user"] = request.form
         return redirect(url_for("user"))
     else:
