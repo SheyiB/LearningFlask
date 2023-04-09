@@ -2,6 +2,8 @@ from app import app
 
 from flask import render_template, request, redirect, url_for, session
 
+app.secret_key = "demoFlask"
+
 @app.route('/')
 def index():
     return render_template("public/index.html")
@@ -16,20 +18,21 @@ def greet(user):
     #return f"<h3> Hello {user} </h3>"
     return render_template("public/greet.html", content=user)
 
-@app.route("/account")
+@app.route("/login", methods = ["POST","GET"])
 def account():
-    return redirect(url_for("index"))
+    if request.method == "POST":
+        session["user"] = request.form
+    else:
+        return render_template("public/login.html")
 
 @app.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
-    
     if request.method == "POST":
         req = request.form
-        
         username = req["username"]
         password = req.get("password")
         email = request.form["email"]
-
         print("Hello ",username, " ",password, " seems pretty unique, you'll get an email at ", email)
-
-    return render_template("public/sign_up.html")
+        return redirect(url_for("account"))
+    else:
+        return render_template("public/sign_up.html")
