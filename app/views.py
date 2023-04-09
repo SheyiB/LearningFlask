@@ -8,6 +8,13 @@ app.secret_key = "demoFlask"
 def index():
     return render_template("public/index.html")
 
+
+@app.route('/user')
+def user():
+    user = session["user"].get("username") 
+   
+    return render_template("public/user.html", content=user)
+
 @app.route('/about')
 def about():
     return "<div style='color': blue  > Hi, Elijah here! </div>"
@@ -22,9 +29,14 @@ def greet(user):
 def account():
     if request.method == "POST":
         session["user"] = request.form
-        return redirect(url_for("index"))
+        return redirect(url_for("user"))
     else:
         return render_template("public/login.html")
+
+@app.route('/logout')
+def logout():
+    session.pop('user', None)
+    return redirect(url_for('account'))
 
 @app.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
@@ -36,4 +48,4 @@ def sign_up():
         print("Hello ",username, " ",password, " seems pretty unique, you'll get an email at ", email)
         return redirect(url_for("account"))
     else:
-        return render_template("public/sign_up.html")
+        return render_template("public/sign_up.html")                       

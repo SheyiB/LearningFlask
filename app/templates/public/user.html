@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}"
+</head>
+<body>
+    <h1> Hello {{content}}, Welcome to  my Python Flask website</h1>
+    <h2>This is the demo Index page</h2>
+    <img 
+    style="max-width: 500px;" 
+    src="{{ url_for('static', filename='img/pic.jpg') }}">
+    <h3>FlowChart</h3>
+
+    <button > <a href="{{url_for('logout')}}">  LOG OUT </a></button>
+</body>
+</html>
