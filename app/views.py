@@ -1,6 +1,6 @@
 from app import app
 
-from flask import render_template, request, redirect, url_for, session
+from flask import make_response, render_template, request, redirect, url_for, session
 from datetime import timedelta
 
 app.secret_key = "demoFlask"
@@ -27,11 +27,15 @@ def about():
 def greet(user):
     print(f"Hi {user}!")
     #return f"<h3> Hello {user} </h3>"
-    return render_template("public/greet.html", content=user)
+    resp = make_response( render_template("public/greet.html", content=user), 201)
+    resp.set_cookie('username', 'joski')
+    return resp
+
 
 @app.route("/login", methods = ["POST","GET"])
 def account():
     if request.method == "POST":
+        request.cookies.get('Me')
         session.permanent = True
         session["user"] = request.form
         return redirect(url_for("user"))
